@@ -13,6 +13,5 @@ export default fp(async (fastify) => {
       parts: 100, // For multipart forms, the max number of parts (fields + files)
     },
     attachFieldsToBody: "keyValues",
-    sharedSchemaId: "#fileSchema",
   });
 });

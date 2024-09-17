@@ -1,7 +1,8 @@
 import { Static, Type } from "@sinclair/typebox";
 import { FastifyPluginAsync } from "fastify";
 import { FastifyInstance } from "fastify/types/instance.js";
-// import { writeFileSync } from "fs";
+import { join } from "path";
+import { writeFileSync } from "fs";
 
 const FormSchema = Type.Object(
   {
@@ -27,7 +28,8 @@ const example: FastifyPluginAsync = async (
       const body = request.body as Formulario;
       console.log({ body });
       const fileBuffer = (body.foto as Buffer).toString();
-      console.log({ fileBuffer });
+      const filename = join(process.cwd(), "public", "archivo");
+      writeFileSync(filename, fileBuffer);
       return body;
     },
   });
