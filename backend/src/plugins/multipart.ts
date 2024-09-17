@@ -12,6 +12,7 @@ export default fp(async (fastify) => {
       headerPairs: 100, // Max number of header key=>value pairs
       parts: 100, // For multipart forms, the max number of parts (fields + files)
     },
-    attachFieldsToBody: "keyValues",
+    attachFieldsToBody: true,
+    sharedSchemaId: "#multiPartSchema",
   });
 });

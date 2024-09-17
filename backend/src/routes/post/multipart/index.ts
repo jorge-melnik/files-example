@@ -6,9 +6,42 @@ import { writeFileSync } from "fs";
 
 const FormSchema = Type.Object(
   {
-    nombre: Type.String(),
-    email: Type.String({ format: "email" }),
-    foto: Type.Object({}),
+    nombre: Type.Object(
+      {
+        type: Type.Literal("field"),
+        fieldname: Type.String(),
+        mimetype: Type.String(),
+        encoding: Type.String(),
+        value: Type.String(),
+        fieldnameTruncated: Type.Boolean(),
+        valueTruncated: Type.Boolean(),
+      },
+      { additionalProperties: false }
+    ),
+    email: Type.Object(
+      {
+        type: Type.Literal("field"),
+        fieldname: Type.String(),
+        mimetype: Type.String(),
+        encoding: Type.String(),
+        value: Type.String(),
+        fieldnameTruncated: Type.Boolean(),
+        valueTruncated: Type.Boolean(),
+      },
+      { additionalProperties: false }
+    ),
+    foto: Type.Object(
+      {
+        type: Type.Literal("file"),
+        fieldname: Type.String(),
+        filename: Type.String(),
+        encoding: Type.String(),
+        mimetype: Type.String(),
+        file: Type.Object({}), // Para manejar el FileStream
+        _buf: Type.Object({}),
+      },
+      { additionalProperties: false }
+    ),
   },
   { additionalProperties: false }
 );
@@ -27,8 +60,8 @@ const example: FastifyPluginAsync = async (
     handler: async function (request, reply) {
       const body = request.body as Formulario;
       console.log({ body });
-      const fileBuffer = (body.foto as Buffer).toString();
-      const filename = join(process.cwd(), "public", "archivo");
+      const fileBuffer = body.foto._buf as Buffer;
+      const filename = join(process.cwd(), "public", body.foto.filename);
       writeFileSync(filename, fileBuffer);
       return body;
     },
