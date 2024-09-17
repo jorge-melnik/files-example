@@ -23,6 +23,7 @@
     "@fastify/formbody": "^7.4.0",
     "@fastify/multipart": "^8.3.0",
     "@fastify/sensible": "^5.0.0",
+    "@fastify/static": "^7.0.4",
     "@sinclair/typebox": "^0.33.11",
     "fastify": "^4.26.1",
     "fastify-cli": "^6.3.0",
