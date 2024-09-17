@@ -7,11 +7,17 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <form action="backend/post/text" method="POST" enctype="text/plain">
+    <form
+      action="backend/post/multipart"
+      method="POST"
+      enctype="multipart/form-data"
+    >
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" required />
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required />
+      <label for="foto">Archivo:</label>
+      <input type="file" id="foto" name="foto" required />
       <button type="submit">Guardar</button>
     </form>
   </body>
